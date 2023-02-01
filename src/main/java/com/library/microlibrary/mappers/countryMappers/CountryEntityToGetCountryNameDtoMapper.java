@@ -7,9 +7,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface CountryEntityToGetCountryNameDto {
+public interface CountryEntityToGetCountryNameDtoMapper {
 
-    CountryEntityToGetCountryNameDto INSTANCE = Mappers.getMapper(CountryEntityToGetCountryNameDto.class);
+    CountryEntityToGetCountryNameDtoMapper INSTANCE = Mappers.getMapper(CountryEntityToGetCountryNameDtoMapper.class);
 
     @Mapping(source = "countryName", target = "countryNameDto")
     GetCountryNameDto countryEntityToGetCountryNameDto(CountryEntity country);

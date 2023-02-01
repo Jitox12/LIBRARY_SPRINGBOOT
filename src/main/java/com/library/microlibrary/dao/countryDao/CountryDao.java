@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.util.List;
 
 public interface CountryDao {
-    public CountryEntity findCountryByIdDao(Integer countryId) throws IOException;
+    public CountryEntity findCountryNameByIdDao(Integer countryId) throws IOException;
 
-    public List<CountryEntity> findCountryListDao() throws IOException;
+    public List<CountryEntity> findCountryNameListDao() throws IOException;
+
+    public CountryEntity findCountryByIdDao(Integer countryId) throws IOException;
 
     public CountryEntity createCountryDao(CreateCountryDto countryDto) throws IOException;
 
-    public void editCountryDao(EditCountryDto countryDto) throws IOException;
+    public CountryEntity editCountryDao(EditCountryDto countryDto) throws IOException;
 }

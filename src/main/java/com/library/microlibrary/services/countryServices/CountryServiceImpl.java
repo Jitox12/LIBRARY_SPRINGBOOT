@@ -7,8 +7,9 @@ import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryNameDto;
 import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
-import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDto;
-import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryNameDto;
+import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
+import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryNameDtoMapper;
+import com.library.microlibrary.utils.returnTextUtils.countryReturnTextUtils.CountryReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,19 +26,19 @@ public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
     //Mapper's
-    private final CountryEntityToGetCountryNameDto getCountryNameDtoMapper;
-    private final CountryEntityToGetCountryDto getCountryMapper;
-    
+    private final CountryEntityToGetCountryNameDtoMapper getCountryNameDtoMapper;
+    private final CountryEntityToGetCountryDtoMapper getCountryMapper;
+
     @Override
     public GetCountryNameDto findCountryNameByIdService(Integer countryId) {
         CountryEntity country = null;
         GetCountryNameDto countryNameDto = null;
 
         try {
-            country = countryDao.findCountryByIdDao(countryId);
+            country = countryDao.findCountryNameByIdDao(countryId);
 
             if (Objects.isNull(country)) {
-                throw new BadRequestException("contry is null");
+                throw new BadRequestException("Country is null");
             }
 
             countryNameDto = getCountryNameDtoMapper.countryEntityToGetCountryNameDto(country);
@@ -54,7 +55,7 @@ public class CountryServiceImpl implements CountryService {
         List<GetCountryNameDto> countryNameDto = null;
 
         try {
-            country = countryDao.findCountryListDao();
+            country = countryDao.findCountryNameListDao();
             countryNameDto = country.stream().map(getCountryNameDtoMapper::countryEntityToGetCountryNameDto).collect(Collectors.toList());
             return countryNameDto;
         } catch (IOException e) {
@@ -82,9 +83,7 @@ public class CountryServiceImpl implements CountryService {
             country = countryDao.createCountryDao(countryDto);
             savedCountryDto = getCountryMapper.countryEntityToGetCountryDto(country);
 
-            returnText = ("***Created a new Country*** \n" +
-                    "\n   Country Name: ").concat(savedCountryDto.getCountryNameDto()) +
-                    "\n   Country Id: ".concat(String.valueOf(savedCountryDto.getCountryIdDto()));
+            returnText = CountryReturnTextUtil.createCountryText(savedCountryDto);
 
             return returnText;
         } catch (IOException e) {
@@ -93,7 +92,25 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public void editCountryService(EditCountryDto countryDto, Integer countryId) {
+    public String editCountryService(EditCountryDto countryDto, Integer countryId) {
+        //New Country
+        GetCountryDto editedCountryDto = null;
+        CountryEntity editedCountry = null;
 
+        //Return Controller Format
+        String returnText = null;
+
+        //Set param's
+        countryDto.setCountryIdDto(countryId);
+
+        try {
+            editedCountry = countryDao.editCountryDao(countryDto);
+            editedCountryDto = getCountryMapper.countryEntityToGetCountryDto(editedCountry);
+
+            returnText = CountryReturnTextUtil.editCountryText(editedCountryDto);
+            return returnText;
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 }

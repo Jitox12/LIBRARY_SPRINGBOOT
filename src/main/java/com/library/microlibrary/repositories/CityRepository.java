@@ -10,5 +10,7 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<CityEntity, Integer> {
 
     List<CityEntity> findAll();
+    CityEntity findCityNameByCityId(Integer cityId);
     CityEntity findByCityId(Integer cityId);
+    CityEntity save(CityEntity city);
 }

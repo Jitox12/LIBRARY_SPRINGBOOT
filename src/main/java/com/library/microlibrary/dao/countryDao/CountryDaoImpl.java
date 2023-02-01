@@ -17,35 +17,50 @@ public class CountryDaoImpl implements CountryDao {
     private final CountryRepository countryRepository;
 
     @Override
-    public CountryEntity findCountryByIdDao(Integer countryId) throws IOException {
-        CountryEntity country = countryRepository.findCountryNameByCountryId(countryId);
+    public CountryEntity findCountryNameByIdDao(Integer countryId) throws IOException {
+        CountryEntity country = null;
+        country = countryRepository.findCountryNameByCountryId(countryId);
         return country;
     }
 
     @Override
-    public List<CountryEntity> findCountryListDao() throws IOException {
-        List<CountryEntity> countryList = countryRepository.findAll();
+    public List<CountryEntity> findCountryNameListDao() throws IOException {
+        List<CountryEntity> countryList = null;
+        countryList = countryRepository.findAll();
         return countryList;
     }
 
     @Override
+    public CountryEntity findCountryByIdDao(Integer countryId) throws IOException {
+        CountryEntity country = null;
+        country = countryRepository.findByCountryId(countryId);
+
+        return country;
+    }
+
+    @Override
     public CountryEntity createCountryDao(CreateCountryDto countryDto) throws IOException {
+        CountryEntity savedCountry = null;
+
        CountryEntity country = CountryEntity.builder()
                .countryName(countryDto.getCountryNameDto())
                .build();
-       CountryEntity savedCountry = countryRepository.save(country);
+       savedCountry = countryRepository.save(country);
 
        return savedCountry;
     }
 
     @Override
-    public void editCountryDao(EditCountryDto countryDto) throws IOException {
+    public CountryEntity editCountryDao(EditCountryDto countryDto) throws IOException {
+        CountryEntity editCountry = null;
+
         CountryEntity country = CountryEntity.builder()
                 .countryId(countryDto.getCountryIdDto())
                 .countryName(countryDto.getCountryNameDto())
                 .build();
 
-        countryRepository.save(country);
+        editCountry = countryRepository.save(country);
 
+        return editCountry;
     }
 }

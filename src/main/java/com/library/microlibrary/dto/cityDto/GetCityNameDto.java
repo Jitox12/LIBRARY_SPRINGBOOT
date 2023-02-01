@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetCityDto {
-    private Integer cityId;
-    private String cityName;
+public class GetCityNameDto {
+    private String cityNameDto;
 }

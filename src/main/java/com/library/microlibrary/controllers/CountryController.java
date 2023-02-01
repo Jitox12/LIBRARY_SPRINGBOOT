@@ -1,6 +1,7 @@
 package com.library.microlibrary.controllers;
 
 import com.library.microlibrary.dto.countryDto.CreateCountryDto;
+import com.library.microlibrary.dto.countryDto.EditCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryNameDto;
 import com.library.microlibrary.services.countryServices.CountryService;
@@ -22,7 +23,7 @@ public class CountryController {
         return countryDto;
     }
 
-    @GetMapping(value = "/find-all-name")
+    @GetMapping(value = "/find-name-list")
     public List<GetCountryNameDto> findCountryNameList() {
         List<GetCountryNameDto> getCountryList = null;
         getCountryList = countryService.findCountryNameListService();
@@ -36,5 +37,15 @@ public class CountryController {
         savedCountryMessage = countryService.createCountryService(countryDto);
 
         return savedCountryMessage;
+    }
+
+
+    @PutMapping(value = "/edit/{countryId}")
+    public String EditCountry(@RequestBody EditCountryDto countryDto, @PathVariable Integer countryId){
+        String editedCountryMessage = null;
+
+        editedCountryMessage = countryService.editCountryService(countryDto,countryId);
+
+        return editedCountryMessage;
     }
 }
