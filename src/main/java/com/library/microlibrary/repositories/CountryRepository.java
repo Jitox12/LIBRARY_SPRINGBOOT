@@ -11,5 +11,6 @@ public interface CountryRepository extends JpaRepository<CountryEntity, Integer>
 
 
     List<CountryEntity> findAll();
-    CountryEntity findByCountryId(Integer countryId);
+    CountryEntity findCountryNameByCountryId(Integer countryId);
+    CountryEntity save(CountryEntity countryEntity);
 }

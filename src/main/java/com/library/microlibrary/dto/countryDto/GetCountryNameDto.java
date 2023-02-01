@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetCountryDto {
-    private Integer countryIdDto;
+public class GetCountryNameDto {
     private String countryNameDto;
 }
