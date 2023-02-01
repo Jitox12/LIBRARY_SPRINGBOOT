@@ -1,47 +1,30 @@
 package com.library.microlibrary.entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "city")
-public class City implements Serializable {
+public class CityEntity implements Serializable {
     private static final long serialVersionUID = 1645180097063090517L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id", nullable = false)
-    private Integer id;
+    private Integer cityId;
 
     @Column(name = "city_name", nullable = false, length = 100)
     private String cityName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
+    private CountryEntity country;
 
 }

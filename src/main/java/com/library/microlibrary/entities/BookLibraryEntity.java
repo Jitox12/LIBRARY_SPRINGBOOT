@@ -1,37 +1,29 @@
 package com.library.microlibrary.entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "book_library")
-public class BookLibrary implements Serializable {
+public class BookLibraryEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
 
     @EmbeddedId
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    private BookEntity book;
 
     @EmbeddedId
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "library_id", nullable = false)
-    private Library library;
+    private LibraryEntity library;
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Library getLibrary() {
-        return library;
-    }
-
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
 
 }
