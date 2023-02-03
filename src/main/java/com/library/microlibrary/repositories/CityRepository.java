@@ -12,7 +12,5 @@ public interface CityRepository extends JpaRepository<CityEntity, Integer> {
     List<CityEntity> findAll();
     CityEntity findCityNameByCityId(Integer cityId);
     CityEntity findByCityId(Integer cityId);
-    List<CityEntity> findByCityIdIn(List<Integer> citiesId);
-
     CityEntity save(CityEntity city);
 }

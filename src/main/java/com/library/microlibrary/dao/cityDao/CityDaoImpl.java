@@ -21,7 +21,7 @@ public class CityDaoImpl implements CityDao {
     @Override
     public CityEntity findCityByIdDao(Integer cityId) throws IOException {
         CityEntity city = null;
-        city = cityRepository.findCityNameByCityId(cityId);
+        city = cityRepository.findByCityId(cityId);
 
         return city;
     }
