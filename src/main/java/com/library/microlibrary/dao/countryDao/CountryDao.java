@@ -11,7 +11,7 @@ import java.util.List;
 public interface CountryDao {
     public CountryEntity findCountryNameByIdDao(Integer countryId) throws IOException;
 
-    public List<CountryEntity> findCountryNameListDao() throws IOException;
+    public List<CountryEntity> findCountryListDao() throws IOException;
 
     public CountryEntity findCountryByIdDao(Integer countryId) throws IOException;
 

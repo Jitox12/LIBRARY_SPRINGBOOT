@@ -1,19 +1,19 @@
 package com.library.microlibrary.mappers.cityMappers;
 
+import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
 import com.library.microlibrary.dto.cityDto.GetCityDto;
-import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.entities.CityEntity;
-import com.library.microlibrary.entities.CountryEntity;
-import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface CityEntityToGetCityDtoMapper {
-    CityEntityToGetCityDtoMapper INSTANCE = Mappers.getMapper(CityEntityToGetCityDtoMapper.class);
+public interface CityEntityToGetCityCountryDtoMapper {
+
+    CityEntityToGetCityCountryDtoMapper INSTANCE = Mappers.getMapper(CityEntityToGetCityCountryDtoMapper.class);
 
     @Mapping(source = "cityId", target = "cityIdDto")
     @Mapping(source = "cityName", target = "cityNameDto")
-    GetCityDto cityEntityToGetCityDto(CityEntity city);
+    @Mapping(source = "country", target = "countryDto")
+    GetCityCountryDto cityEntityToGetCityDto(CityEntity city);
 }

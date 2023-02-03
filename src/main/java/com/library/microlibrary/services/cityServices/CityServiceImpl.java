@@ -44,7 +44,7 @@ public class CityServiceImpl implements CityService{
         GetCityNameDto cityName = null;
 
         try{
-            city = cityDao.findCityNameByIdDao(cityId);
+            city = cityDao.findCityByIdDao(cityId);
 
             if(Objects.isNull(city)){
                 throw new BadRequestException("City Does not exist");
@@ -63,7 +63,7 @@ public class CityServiceImpl implements CityService{
         List<GetCityNameDto> cityNameListDto = null;
 
         try{
-            cityList = cityDao.findCityNameListDao();
+            cityList = cityDao.findCityListDao();
             cityNameListDto = cityList.stream().map(cityEntityToGetCityNameDtoMapper::cityEntityToGetCityNameDto).collect(Collectors.toList());
 
             return cityNameListDto;
@@ -92,7 +92,7 @@ public class CityServiceImpl implements CityService{
 
             savedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(savedCity);
 
-            returnText = CityReturnTextUtil.createCountryText(savedCityDto, countryDto);
+            returnText = CityReturnTextUtil.createCityText(savedCityDto, countryDto);
 
             return returnText;
         }catch (IOException e){
@@ -122,7 +122,7 @@ public class CityServiceImpl implements CityService{
             editedCity = cityDao.editCityDao(cityDto, countryDto);
             editedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(editedCity);
 
-            returnText = CityReturnTextUtil.editCountryText(editedCityDto, countryDto);
+            returnText = CityReturnTextUtil.editCityText(editedCityDto, countryDto);
 
             return returnText;
 

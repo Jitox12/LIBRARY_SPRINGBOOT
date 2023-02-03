@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,4 +35,15 @@ public class BookEntity implements Serializable {
 
     @Column(name = "book_img", nullable = false)
     private byte[] bookImg;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private CategoryEntity category;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_author",
+            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "author_id")})
+    private List<AuthorEntity> authors;
 }

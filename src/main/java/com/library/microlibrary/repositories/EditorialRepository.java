@@ -12,4 +12,5 @@ public interface EditorialRepository extends JpaRepository<EditorialEntity, Inte
 
     List<EditorialEntity> findAll();
     EditorialEntity findByEditorialId(Integer editorialId);
+    EditorialEntity findEditorialNameByEditorialId(Integer editorialId);
 }

@@ -19,7 +19,7 @@ public class CityDaoImpl implements CityDao {
     private final CityRepository cityRepository;
 
     @Override
-    public CityEntity findCityNameByIdDao(Integer cityId) throws IOException {
+    public CityEntity findCityByIdDao(Integer cityId) throws IOException {
         CityEntity city = null;
         city = cityRepository.findCityNameByCityId(cityId);
 
@@ -27,7 +27,7 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    public List<CityEntity> findCityNameListDao() throws IOException {
+    public List<CityEntity> findCityListDao() throws IOException {
         List<CityEntity> cityList = null;
         cityList = cityRepository.findAll();
 
@@ -75,4 +75,5 @@ public class CityDaoImpl implements CityDao {
 
         return editedCity;
     }
+
 }

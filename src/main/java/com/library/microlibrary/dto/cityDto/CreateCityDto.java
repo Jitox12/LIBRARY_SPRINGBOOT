@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 public class CreateCityDto {
+
     private String cityNameDto;
     private Integer countryIdDto;
 }

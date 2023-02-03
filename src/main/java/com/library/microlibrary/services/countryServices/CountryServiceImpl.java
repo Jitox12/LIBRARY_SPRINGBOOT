@@ -1,12 +1,17 @@
 package com.library.microlibrary.services.countryServices;
 
+import com.library.microlibrary.dao.cityDao.CityDao;
+import com.library.microlibrary.dao.cityDao.CityDaoImpl;
 import com.library.microlibrary.dao.countryDao.CountryDao;
+import com.library.microlibrary.dto.cityDto.GetCityDto;
 import com.library.microlibrary.dto.countryDto.CreateCountryDto;
 import com.library.microlibrary.dto.countryDto.EditCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryNameDto;
+import com.library.microlibrary.entities.CityEntity;
 import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
+import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryNameDtoMapper;
 import com.library.microlibrary.utils.returnTextUtils.countryReturnTextUtils.CountryReturnTextUtil;
@@ -24,10 +29,13 @@ public class CountryServiceImpl implements CountryService {
 
     //Dao's
     private final CountryDao countryDao;
+    private final CityDao cityDao;
 
     //Mapper's
     private final CountryEntityToGetCountryNameDtoMapper getCountryNameDtoMapper;
     private final CountryEntityToGetCountryDtoMapper getCountryMapper;
+
+    private  final CityEntityToGetCityDtoMapper cityEntityToGetCityDtoMapper;
 
     @Override
     public GetCountryNameDto findCountryNameByIdService(Integer countryId) {
@@ -55,7 +63,7 @@ public class CountryServiceImpl implements CountryService {
         List<GetCountryNameDto> countryNameDto = null;
 
         try {
-            country = countryDao.findCountryNameListDao();
+            country = countryDao.findCountryListDao();
             countryNameDto = country.stream().map(getCountryNameDtoMapper::countryEntityToGetCountryNameDto).collect(Collectors.toList());
             return countryNameDto;
         } catch (IOException e) {
@@ -113,4 +121,6 @@ public class CountryServiceImpl implements CountryService {
             throw new RuntimeException(e);
         }
     }
+
+
 }

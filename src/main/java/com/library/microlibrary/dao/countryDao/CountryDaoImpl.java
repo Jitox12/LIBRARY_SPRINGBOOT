@@ -2,6 +2,7 @@ package com.library.microlibrary.dao.countryDao;
 
 import com.library.microlibrary.dto.countryDto.CreateCountryDto;
 import com.library.microlibrary.dto.countryDto.EditCountryDto;
+import com.library.microlibrary.entities.CityEntity;
 import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.repositories.CountryRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     @Override
-    public List<CountryEntity> findCountryNameListDao() throws IOException {
+    public List<CountryEntity> findCountryListDao() throws IOException {
         List<CountryEntity> countryList = null;
         countryList = countryRepository.findAll();
         return countryList;

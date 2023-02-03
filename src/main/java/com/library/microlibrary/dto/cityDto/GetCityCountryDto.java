@@ -1,5 +1,6 @@
 package com.library.microlibrary.dto.cityDto;
 
+import com.library.microlibrary.entities.CountryEntity;
 import lombok.*;
 
 @Builder
@@ -7,9 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetCityDto {
-
+public class GetCityCountryDto {
     private Integer cityIdDto;
     private String cityNameDto;
-    private Integer countryIdDto;
+    private CountryEntity countryDto;
 }
