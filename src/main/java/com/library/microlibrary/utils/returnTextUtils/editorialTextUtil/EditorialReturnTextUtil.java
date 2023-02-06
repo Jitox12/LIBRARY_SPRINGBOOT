@@ -9,7 +9,7 @@ public class EditorialReturnTextUtil {
 
         returnText = ("***Created a new Editorial*** \n" +
                 "\n   Editorial Id: ").concat(String.valueOf(editorialDto.getEditorialIdDto())) +
-                "\n   Editorial Name: ".concat(editorialDto.getEditorialNameDto());
+                "\n   Editorial Name: ".concat(editorialDto.getEditorialNameDto())+
                 "\n   Editorial City: ".concat(String.valueOf(editorialDto.getCityNameDto()));
         return returnText;
     }

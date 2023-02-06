@@ -9,6 +9,7 @@ import com.library.microlibrary.repositories.AuthorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,17 +19,17 @@ public class AuthorDaoImpl implements AuthorDao{
     private  final AuthorRepository authorRepository;
 
     @Override
-    public AuthorEntity findAuthorByIdDao(Integer authorId) {
+    public AuthorEntity findAuthorByIdDao(Integer authorId)  throws IOException {
         return null;
     }
 
     @Override
-    public List<AuthorEntity> findAuthorListDao() {
+    public List<AuthorEntity> findAuthorListDao()  throws IOException{
         return null;
     }
 
     @Override
-    public void createAuthorDao(CreateAuthorDto authorDto, GetCityDto cityDto) {
+    public void createAuthorDao(CreateAuthorDto authorDto, GetCityDto cityDto) throws IOException{
         AuthorEntity author = null;
         CityEntity city = null;
 
@@ -37,7 +38,7 @@ public class AuthorDaoImpl implements AuthorDao{
     }
 
     @Override
-    public void editAuthorDao(EditAuthorDto authorDto, GetCityDto cityDto) {
+    public void editAuthorDao(EditAuthorDto authorDto, GetCityDto cityDto) throws IOException{
 
     }
 }

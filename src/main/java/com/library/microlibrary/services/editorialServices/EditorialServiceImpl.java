@@ -12,6 +12,7 @@ import com.library.microlibrary.dto.editorialDto.GetEditorialDto;
 import com.library.microlibrary.entities.CityEntity;
 import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.entities.EditorialEntity;
+import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityCountryDtoMapper;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -42,22 +44,33 @@ public class EditorialServiceImpl implements EditorialService{
         EditorialEntity editorial;
         GetEditorialDto editorialDto;
 
-        editorial = editorialDao.findEditorialByIdDao(editorialId);
-        editorialDto = editorialEntityToGetEditorialDtoMapper.editorialEntityToGetEditorialDto(editorial);
+        try{
+            editorial = editorialDao.findEditorialByIdDao(editorialId);
+            if(Objects.isNull(editorial)){
+                throw new BadRequestException("Editorial does not exist with Id: "
+                        .concat(String.valueOf(editorialId)));
+            }
+            editorialDto = editorialEntityToGetEditorialDtoMapper.editorialEntityToGetEditorialDto(editorial);
 
-        return editorialDto;
+            return editorialDto;
+
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<GetEditorialDto> findEditorialListService() {
         List<EditorialEntity> editorial = null;
         List<GetEditorialDto> editorialListDto = null;
+        try{
+            editorial = editorialDao.findEditorialListDao();
+            editorialListDto = editorial.stream().map(editorialEntityToGetEditorialDtoMapper::editorialEntityToGetEditorialDto).collect(Collectors.toList());
 
-        editorial = editorialDao.findEditorialListDao();
-        editorialListDto = editorial.stream().map(editorialEntityToGetEditorialDtoMapper::editorialEntityToGetEditorialDto).collect(Collectors.toList());
-
-
-        return editorialListDto;
+            return editorialListDto;
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -71,6 +84,9 @@ public class EditorialServiceImpl implements EditorialService{
         String returnText = null;
         try {
             city = cityDao.findCityByIdDao(editorialDto.getCityIdDto());
+            if(Objects.isNull(city)){
+                throw new BadRequestException("City does not exist with Id: ".concat(String.valueOf(editorialDto.getCityIdDto())));
+            }
             cityDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
 
             savedEditorial = editorialDao.createEditorialDao(editorialDto, cityDto);
@@ -97,6 +113,10 @@ public class EditorialServiceImpl implements EditorialService{
             editorialDto.setEditorialIdDto(editorialId);
 
             city = cityDao.findCityByIdDao(editorialDto.getCityIdDto());
+            if(Objects.isNull(city)){
+                throw new BadRequestException("City does not exist with Id: ".concat(String.valueOf(editorialDto.getCityIdDto())));
+            }
+
             cityDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
 
             savedEditorial = editorialDao.editEditorialDao(editorialDto, cityDto);

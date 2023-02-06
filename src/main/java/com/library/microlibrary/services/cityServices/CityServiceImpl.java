@@ -47,7 +47,7 @@ public class CityServiceImpl implements CityService{
             city = cityDao.findCityByIdDao(cityId);
 
             if(Objects.isNull(city)){
-                throw new BadRequestException("City Does not exist");
+                throw new BadRequestException("City Does not with Id: ".concat(String.valueOf(cityId)));
             }
             cityName = cityEntityToGetCityNameDtoMapper.cityEntityToGetCityNameDto(city);
 
@@ -83,13 +83,12 @@ public class CityServiceImpl implements CityService{
 
         try{
             country = countryDao.findCountryByIdDao(cityDto.getCountryIdDto());
-
             if(Objects.isNull(country)){
-                throw new BadRequestException("Country does not exist");
+                throw new BadRequestException("Country Does not with Id: ".concat(String.valueOf(cityDto.getCountryIdDto())));
             }
             countryDto = countryEntityToGetCountryDtoMapper.countryEntityToGetCountryDto(country);
-            savedCity = cityDao.createCityDao(cityDto, countryDto);
 
+            savedCity = cityDao.createCityDao(cityDto, countryDto);
             savedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(savedCity);
 
             returnText = CityReturnTextUtil.createCityText(savedCityDto, countryDto);
@@ -116,16 +115,16 @@ public class CityServiceImpl implements CityService{
             country = countryDao.findCountryByIdDao(cityDto.getCountryIdDto());
 
             if(Objects.isNull(country)){
-                throw new BadRequestException("Country does not exist");
+                throw new BadRequestException("Country does not exist with Id: ".concat(String.valueOf(cityDto.getCountryIdDto())));
             }
             countryDto = countryEntityToGetCountryDtoMapper.countryEntityToGetCountryDto(country);
+
             editedCity = cityDao.editCityDao(cityDto, countryDto);
             editedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(editedCity);
 
             returnText = CityReturnTextUtil.editCityText(editedCityDto, countryDto);
 
             return returnText;
-
         }catch (IOException e){
             throw new RuntimeException(e);
         }

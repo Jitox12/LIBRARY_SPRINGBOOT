@@ -23,4 +23,8 @@ public class LibraryEntity implements Serializable {
     @Column(name = "library_name", nullable = false, length = 100)
     private String libraryName;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private CityEntity city;
+
 }

@@ -1,8 +1,6 @@
-package com.library.microlibrary.utils.returnTextUtils.CategoryTextUtils;
+package com.library.microlibrary.utils.returnTextUtils.categoryTextUtils;
 
 import com.library.microlibrary.dto.categoryDto.GetCategoryDto;
-import com.library.microlibrary.dto.cityDto.GetCityDto;
-import com.library.microlibrary.dto.countryDto.GetCountryDto;
 
 public class CategoryReturnTextUtil {
     public static String createCityText(GetCategoryDto categoryDto){

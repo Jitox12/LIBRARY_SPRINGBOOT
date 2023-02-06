@@ -7,12 +7,13 @@ import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.entities.BookEntity;
 import com.library.microlibrary.entities.CityEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BookDao {
 
-    public BookEntity findBookByIdDao(Integer bookId);
-    public List<BookEntity> findBookListDao();
-    public void createBookDao(CreateBookDto bookDto);
-    public void editBookDao(EditBookDto bookDto);
+    public BookEntity findBookByIdDao(Integer bookId) throws IOException;
+    public List<BookEntity> findBookListDao() throws IOException;
+    public void createBookDao(CreateBookDto bookDto) throws IOException;
+    public void editBookDao(EditBookDto bookDto) throws IOException;
 }

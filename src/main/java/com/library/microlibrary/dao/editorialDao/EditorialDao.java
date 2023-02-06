@@ -7,13 +7,14 @@ import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
 import com.library.microlibrary.entities.EditorialEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EditorialDao {
 
-    public EditorialEntity findEditorialNameByIdDao(Integer editorialId);
-    EditorialEntity findEditorialByIdDao(Integer editorialId);
-    public List<EditorialEntity> findEditorialListDao();
-    public EditorialEntity createEditorialDao(CreateEditorialDto editorialDto, GetCityCountryDto cityDto);
-    public EditorialEntity editEditorialDao(EditEditorialDto editorialDto, GetCityCountryDto cityDto);
+    public EditorialEntity findEditorialNameByIdDao(Integer editorialId) throws IOException;
+    EditorialEntity findEditorialByIdDao(Integer editorialId) throws IOException;
+    public List<EditorialEntity> findEditorialListDao() throws IOException;
+    public EditorialEntity createEditorialDao(CreateEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
+    public EditorialEntity editEditorialDao(EditEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
 }

@@ -7,6 +7,7 @@ import com.library.microlibrary.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class CategoryDaoImpl implements CategoryDao{
     private final CategoryRepository categoryRepository;
 
     @Override
-    public CategoryEntity findCategoryByIdDao(Integer categoryId) {
+    public CategoryEntity findCategoryByIdDao(Integer categoryId) throws IOException {
         CategoryEntity category = null;
         category = categoryRepository.findByCategoryId(categoryId);
 
@@ -24,7 +25,7 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public List<CategoryEntity> findCategoryListDao() {
+    public List<CategoryEntity> findCategoryListDao() throws IOException{
         List<CategoryEntity> categoryList = null;
         categoryList = categoryRepository.findAll();
 
@@ -32,7 +33,7 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public CategoryEntity createCategoryDao(CreateCategoryDto categoryDto) {
+    public CategoryEntity createCategoryDao(CreateCategoryDto categoryDto) throws IOException{
         CategoryEntity category = null;
         CategoryEntity savedCategory = null;
 
@@ -46,7 +47,7 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public CategoryEntity editCategoryDao(EditCategoryDto categoryDto) {
+    public CategoryEntity editCategoryDao(EditCategoryDto categoryDto) throws IOException{
         CategoryEntity category = null;
         CategoryEntity editedCategory = null;
 

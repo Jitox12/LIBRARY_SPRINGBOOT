@@ -6,18 +6,21 @@ import com.library.microlibrary.dto.categoryDto.EditCategoryDto;
 import com.library.microlibrary.dto.categoryDto.GetCategoryDto;
 import com.library.microlibrary.dto.categoryDto.GetCategoryNameDto;
 import com.library.microlibrary.entities.CategoryEntity;
+import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryDtoMapper;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryNameDtoMapper;
-import com.library.microlibrary.utils.returnTextUtils.CategoryTextUtils.CategoryReturnTextUtil;
+import com.library.microlibrary.utils.returnTextUtils.categoryTextUtils.CategoryReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     //DAO
     private final CategoryDao categoryDao;
@@ -32,10 +35,17 @@ public class CategoryServiceImpl implements CategoryService{
         CategoryEntity category = null;
         GetCategoryDto categoryDto = null;
 
-        category = categoryDao.findCategoryByIdDao(categoryId);
-        categoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
+        try {
+            category = categoryDao.findCategoryByIdDao(categoryId);
+            if(Objects.isNull(category)){
+                throw new BadRequestException("Category does not exist with id: ".concat(String.valueOf(categoryId)));
+            }
+            categoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
 
-        return categoryDto;
+            return categoryDto;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -43,10 +53,17 @@ public class CategoryServiceImpl implements CategoryService{
         CategoryEntity category = null;
         GetCategoryNameDto categoryDto = null;
 
-        category = categoryDao.findCategoryByIdDao(categoryId);
-        categoryDto = categoryEntityToGetCategoryNameDtoMapper.categoryEntityToGetGetCategoryNameDtoDto(category);
+        try {
+            category = categoryDao.findCategoryByIdDao(categoryId);
+            if(Objects.isNull(category)){
+                throw new BadRequestException("Category does not exist with id: ".concat(String.valueOf(categoryId)));
+            }
+            categoryDto = categoryEntityToGetCategoryNameDtoMapper.categoryEntityToGetGetCategoryNameDtoDto(category);
 
-        return categoryDto;
+            return categoryDto;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -54,20 +71,30 @@ public class CategoryServiceImpl implements CategoryService{
         List<CategoryEntity> categoryList = null;
         List<GetCategoryNameDto> categoryDto = null;
 
-        categoryList = categoryDao.findCategoryListDao();
-        categoryDto = categoryList.stream().map(categoryEntityToGetCategoryNameDtoMapper::categoryEntityToGetGetCategoryNameDtoDto).collect(Collectors.toList());
+        try {
+            categoryList = categoryDao.findCategoryListDao();
+            categoryDto = categoryList.stream().map(categoryEntityToGetCategoryNameDtoMapper::categoryEntityToGetGetCategoryNameDtoDto).collect(Collectors.toList());
 
-        return categoryDto;
+            return categoryDto;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     @Override
     public List<GetCategoryDto> findCategoryListService() {
         List<CategoryEntity> categoryList = null;
         List<GetCategoryDto> categoryDto = null;
 
-        categoryList = categoryDao.findCategoryListDao();
-        categoryDto = categoryList.stream().map(categoryEntityToGetCategoryDtoMapper::categoryEntityToGetCategoryDto).collect(Collectors.toList());
 
-        return categoryDto;
+        try {
+            categoryList = categoryDao.findCategoryListDao();
+            categoryDto = categoryList.stream().map(categoryEntityToGetCategoryDtoMapper::categoryEntityToGetCategoryDto).collect(Collectors.toList());
+
+            return categoryDto;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -76,13 +103,17 @@ public class CategoryServiceImpl implements CategoryService{
         CategoryEntity category = null;
         GetCategoryDto savedCategoryDto = null;
 
-        category = categoryDao.createCategoryDao(categoryDto);
-        savedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
 
-        returnText = CategoryReturnTextUtil.createCityText(savedCategoryDto);
+        try {
+            category = categoryDao.createCategoryDao(categoryDto);
+            savedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
 
-        return returnText;
+            returnText = CategoryReturnTextUtil.createCityText(savedCategoryDto);
 
+            return returnText;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -93,11 +124,14 @@ public class CategoryServiceImpl implements CategoryService{
 
         categoryDto.setCategoryIdDto(categoryId);
 
-        category = categoryDao.editCategoryDao(categoryDto);
-        editedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
+        try {
+            category = categoryDao.editCategoryDao(categoryDto);
+            editedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
 
-        returnText = CategoryReturnTextUtil.editCityText(editedCategoryDto);
-
+            returnText = CategoryReturnTextUtil.editCityText(editedCategoryDto);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return returnText;
     }
 }
