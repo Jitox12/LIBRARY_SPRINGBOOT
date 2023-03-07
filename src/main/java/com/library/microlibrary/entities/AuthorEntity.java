@@ -22,8 +22,8 @@ public class AuthorEntity implements Serializable {
     @Column(name = "author_name", nullable = false, length = 50)
     private String authorName;
 
-    @Column(name = "author_img", nullable = false)
-    private byte[] authorImg;
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private CityEntity city;
 
 }

@@ -30,12 +30,6 @@ public class BookEntity implements Serializable {
     @Column(name = "book_isbn", nullable = false, length = 50)
     private String bookIsbn;
 
-    @Column(name = "book_stock", nullable = false)
-    private Integer bookStock;
-
-    @Column(name = "book_img", nullable = false)
-    private byte[] bookImg;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;

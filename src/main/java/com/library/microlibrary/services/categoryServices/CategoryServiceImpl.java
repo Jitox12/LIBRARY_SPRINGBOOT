@@ -10,7 +10,6 @@ import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryDtoMapper;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryNameDtoMapper;
 import com.library.microlibrary.utils.returnTextUtils.categoryTextUtils.CategoryReturnTextUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -28,6 +26,12 @@ public class CategoryServiceImpl implements CategoryService {
     //MAPPERS
     private final CategoryEntityToGetCategoryDtoMapper categoryEntityToGetCategoryDtoMapper;
     private final CategoryEntityToGetCategoryNameDtoMapper categoryEntityToGetCategoryNameDtoMapper;
+
+    public CategoryServiceImpl(CategoryDao categoryDao, CategoryEntityToGetCategoryDtoMapper categoryEntityToGetCategoryDtoMapper, CategoryEntityToGetCategoryNameDtoMapper categoryEntityToGetCategoryNameDtoMapper) {
+        this.categoryDao = categoryDao;
+        this.categoryEntityToGetCategoryDtoMapper = categoryEntityToGetCategoryDtoMapper;
+        this.categoryEntityToGetCategoryNameDtoMapper = categoryEntityToGetCategoryNameDtoMapper;
+    }
 
 
     @Override
