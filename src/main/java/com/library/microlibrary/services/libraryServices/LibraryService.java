@@ -12,6 +12,6 @@ public interface LibraryService {
 
     public GetLibraryDto findLibraryByIdService(Integer libraryId);
     public List<GetLibraryDto> findLibraryListService();
-    public String createLibraryService(CreateLibraryDto libraryDto);
-    public String editLibraryService(EditLibraryDto libraryDto, Integer libraryId);
+    public void createLibraryService(CreateLibraryDto libraryDto);
+    public void editLibraryService(EditLibraryDto libraryDto, Integer libraryId);
 }

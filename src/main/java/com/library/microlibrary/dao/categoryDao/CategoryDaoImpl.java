@@ -33,7 +33,7 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public CategoryEntity createCategoryDao(CreateCategoryDto categoryDto) throws IOException{
+    public void createCategoryDao(CreateCategoryDto categoryDto) throws IOException{
         CategoryEntity category = null;
         CategoryEntity savedCategory = null;
 
@@ -43,11 +43,10 @@ public class CategoryDaoImpl implements CategoryDao{
 
         savedCategory = categoryRepository.save(category);
 
-        return savedCategory;
     }
 
     @Override
-    public CategoryEntity editCategoryDao(EditCategoryDto categoryDto) throws IOException{
+    public void editCategoryDao(EditCategoryDto categoryDto) throws IOException{
         CategoryEntity category = null;
         CategoryEntity editedCategory = null;
 
@@ -58,6 +57,5 @@ public class CategoryDaoImpl implements CategoryDao{
 
         editedCategory = categoryRepository.save(category);
 
-        return editedCategory;
     }
 }

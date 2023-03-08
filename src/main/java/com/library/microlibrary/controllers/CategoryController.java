@@ -49,18 +49,16 @@ public class CategoryController {
 
     @PostMapping(value="/create")
     public String createCategory(@RequestBody CreateCategoryDto createCategoryDto){
-        String returnText = null;
-        returnText = categoryService.createCategoryService(createCategoryDto);
+        categoryService.createCategoryService(createCategoryDto);
 
-        return returnText;
+        return "CATEGORY CREATED";
     }
 
     @PutMapping(value="/edit/{categoryId}")
     public String editCategory(@RequestBody EditCategoryDto editCategoryDto, @PathVariable Integer categoryId){
-        String returnText = null;
-        returnText = categoryService.editCategoryService(editCategoryDto, categoryId);
+        categoryService.editCategoryService(editCategoryDto, categoryId);
 
-        return returnText;
+        return "CATEGORY EDITED";
     }
 
 }

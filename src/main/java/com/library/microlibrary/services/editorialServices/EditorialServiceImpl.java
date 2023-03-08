@@ -4,20 +4,14 @@ import com.library.microlibrary.dao.cityDao.CityDao;
 import com.library.microlibrary.dao.countryDao.CountryDao;
 import com.library.microlibrary.dao.editorialDao.EditorialDao;
 import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
-import com.library.microlibrary.dto.cityDto.GetCityDto;
-import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
 import com.library.microlibrary.dto.editorialDto.GetEditorialDto;
 import com.library.microlibrary.entities.CityEntity;
-import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.entities.EditorialEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityCountryDtoMapper;
-import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityDtoMapper;
-import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
 import com.library.microlibrary.mappers.editorialMappers.EditorialEntityToGetEditorialDtoMapper;
-import com.library.microlibrary.utils.returnTextUtils.editorialTextUtil.EditorialReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +68,7 @@ public class EditorialServiceImpl implements EditorialService{
     }
 
     @Override
-    public String createEditorialService(CreateEditorialDto editorialDto) {
+    public void createEditorialService(CreateEditorialDto editorialDto) {
         EditorialEntity savedEditorial = null;
         CityEntity city = null;
 
@@ -89,26 +83,17 @@ public class EditorialServiceImpl implements EditorialService{
             }
             cityDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
 
-            savedEditorial = editorialDao.createEditorialDao(editorialDto, cityDto);
-            savedEditorialDto = editorialEntityToGetEditorialDtoMapper.editorialEntityToGetEditorialDto(savedEditorial);
-
-            returnText = EditorialReturnTextUtil.createCountryText(savedEditorialDto);
-
-            return returnText;
+            editorialDao.createEditorialDao(editorialDto, cityDto);
         }catch (IOException e){
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String editEditorialService(EditEditorialDto editorialDto, Integer editorialId) {
-        EditorialEntity savedEditorial = null;
+    public void editEditorialService(EditEditorialDto editorialDto, Integer editorialId) {
         CityEntity city = null;
-
         GetCityCountryDto cityDto = null;
-        GetEditorialDto editedEditorialDto = null;
 
-        String returnText = null;
         try {
             editorialDto.setEditorialIdDto(editorialId);
 
@@ -119,12 +104,8 @@ public class EditorialServiceImpl implements EditorialService{
 
             cityDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
 
-            savedEditorial = editorialDao.editEditorialDao(editorialDto, cityDto);
-            editedEditorialDto = editorialEntityToGetEditorialDtoMapper.editorialEntityToGetEditorialDto(savedEditorial);
+            editorialDao.editEditorialDao(editorialDto, cityDto);
 
-            returnText = EditorialReturnTextUtil.createCountryText(editedEditorialDto);
-
-            return returnText;
         }catch (IOException e){
             throw new RuntimeException(e);
         }

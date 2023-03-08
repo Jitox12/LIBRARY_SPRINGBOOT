@@ -13,8 +13,6 @@ import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityDtoMapper;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityNameDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
-import com.library.microlibrary.repositories.CityRepository;
-import com.library.microlibrary.utils.returnTextUtils.cityReturnTextUtils.CityReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -73,13 +71,12 @@ public class CityServiceImpl implements CityService{
     }
 
     @Override
-    public String createCityService(CreateCityDto cityDto) {
+    public void createCityService(CreateCityDto cityDto) {
         CityEntity savedCity = null;
         GetCityDto savedCityDto = null;
 
         CountryEntity country = null;
         GetCountryDto countryDto = null;
-        String returnText = null;
 
         try{
             country = countryDao.findCountryByIdDao(cityDto.getCountryIdDto());
@@ -89,25 +86,20 @@ public class CityServiceImpl implements CityService{
             countryDto = countryEntityToGetCountryDtoMapper.countryEntityToGetCountryDto(country);
 
             savedCity = cityDao.createCityDao(cityDto, countryDto);
-            savedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(savedCity);
+            cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(savedCity);
 
-            returnText = CityReturnTextUtil.createCityText(savedCityDto, countryDto);
-
-            return returnText;
         }catch (IOException e){
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String editCityService(EditCityDto cityDto, Integer cityId) {
+    public void editCityService(EditCityDto cityDto, Integer cityId) {
         CityEntity editedCity = null;
         GetCityDto editedCityDto = null;
 
         CountryEntity country = null;
         GetCountryDto countryDto = null;
-
-        String returnText = null;
 
         try{
             cityDto.setCityIdDto(cityId);
@@ -120,11 +112,8 @@ public class CityServiceImpl implements CityService{
             countryDto = countryEntityToGetCountryDtoMapper.countryEntityToGetCountryDto(country);
 
             editedCity = cityDao.editCityDao(cityDto, countryDto);
-            editedCityDto = cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(editedCity);
+            cityEntityToGetCityDtoMapper.cityEntityToGetCityDto(editedCity);
 
-            returnText = CityReturnTextUtil.editCityText(editedCityDto, countryDto);
-
-            return returnText;
         }catch (IOException e){
             throw new RuntimeException(e);
         }

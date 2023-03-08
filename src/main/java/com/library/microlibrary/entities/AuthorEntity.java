@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,4 +27,10 @@ public class AuthorEntity implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_author",
+            joinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "author_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "book_id")})
+    private List<BookEntity> books;
 }

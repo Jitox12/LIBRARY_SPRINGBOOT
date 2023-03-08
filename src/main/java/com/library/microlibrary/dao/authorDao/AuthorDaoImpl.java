@@ -22,7 +22,6 @@ public class AuthorDaoImpl implements AuthorDao{
     public AuthorEntity findAuthorByIdDao(Integer authorId)  throws IOException {
         AuthorEntity author = null;
         author = authorRepository.findByAuthorId(authorId);
-
         return author;
     }
 

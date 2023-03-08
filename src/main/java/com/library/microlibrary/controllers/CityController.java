@@ -34,15 +34,13 @@ public class CityController {
 
     @PostMapping(value = "/create")
     public String createCity(@RequestBody CreateCityDto cityDto) {
-        String returnText = null;
-        returnText = cityService.createCityService(cityDto);
-        return returnText;
+        cityService.createCityService(cityDto);
+        return "CITY CREATED";
     }
 
     @PutMapping(value = "/edit/{cityId}")
     public String editCity(@PathVariable Integer cityId, @RequestBody EditCityDto cityDto) {
-        String returnText = null;
-        returnText = cityService.editCityService(cityDto, cityId);
-        return returnText;
+        cityService.editCityService(cityDto, cityId);
+        return "CITY EDITED";
     }
 }

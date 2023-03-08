@@ -12,6 +12,6 @@ public interface CategoryDao {
 
     public CategoryEntity findCategoryByIdDao(Integer categoryId) throws IOException;
     public List<CategoryEntity> findCategoryListDao() throws IOException;
-    public CategoryEntity createCategoryDao(CreateCategoryDto categoryDto) throws IOException;
-    public CategoryEntity editCategoryDao(EditCategoryDto categoryDto) throws IOException;
+    public void createCategoryDao(CreateCategoryDto categoryDto) throws IOException;
+    public void editCategoryDao(EditCategoryDto categoryDto) throws IOException;
 }

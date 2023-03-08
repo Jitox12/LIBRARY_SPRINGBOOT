@@ -12,6 +12,6 @@ public interface CityService {
 
     public GetCityNameDto findCityNameByIdService(Integer cityId);
     public List<GetCityNameDto> findCityNameListService();
-    public String createCityService(CreateCityDto cityDto);
-    public String editCityService(EditCityDto cityDto, Integer cityId);
+    public void createCityService(CreateCityDto cityDto);
+    public void editCityService(EditCityDto cityDto, Integer cityId);
 }

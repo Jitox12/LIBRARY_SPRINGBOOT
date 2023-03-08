@@ -9,7 +9,6 @@ import com.library.microlibrary.entities.CategoryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryDtoMapper;
 import com.library.microlibrary.mappers.categoryMappers.CategoryEntityToGetCategoryNameDtoMapper;
-import com.library.microlibrary.utils.returnTextUtils.categoryTextUtils.CategoryReturnTextUtil;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -102,40 +101,31 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public String createCategoryService(CreateCategoryDto categoryDto) {
+    public void createCategoryService(CreateCategoryDto categoryDto) {
         String returnText = null;
         CategoryEntity category = null;
         GetCategoryDto savedCategoryDto = null;
 
-
         try {
-            category = categoryDao.createCategoryDao(categoryDto);
-            savedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
+            categoryDao.createCategoryDao(categoryDto);
 
-            returnText = CategoryReturnTextUtil.createCityText(savedCategoryDto);
-
-            return returnText;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String editCategoryService(EditCategoryDto categoryDto, Integer categoryId) {
-        String returnText = null;
+    public void editCategoryService(EditCategoryDto categoryDto, Integer categoryId) {
         CategoryEntity category = null;
         GetCategoryDto editedCategoryDto = null;
 
         categoryDto.setCategoryIdDto(categoryId);
 
         try {
-            category = categoryDao.editCategoryDao(categoryDto);
-            editedCategoryDto = categoryEntityToGetCategoryDtoMapper.categoryEntityToGetCategoryDto(category);
+            categoryDao.editCategoryDao(categoryDto);
 
-            returnText = CategoryReturnTextUtil.editCityText(editedCategoryDto);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return returnText;
     }
 }

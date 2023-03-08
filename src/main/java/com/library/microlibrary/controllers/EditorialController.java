@@ -34,17 +34,13 @@ public class EditorialController {
 
     @PostMapping(value = "/create")
     public String createEditorial(@RequestBody CreateEditorialDto editorialDto){
-        String returnText = null;
-        returnText = editorialService.createEditorialService(editorialDto);
-
-        return returnText;
+        editorialService.createEditorialService(editorialDto);
+        return "EDITORIAL CREATED";
     }
     @PutMapping(value = "/edit/{editorialId}")
     public String editEditorial(@RequestBody EditEditorialDto editorialDto, @PathVariable Integer editorialId){
-        String returnText = null;
-        returnText = editorialService.editEditorialService(editorialDto, editorialId);
-
-        return returnText;
+       editorialService.editEditorialService(editorialDto, editorialId);
+        return "EDITORIAL EDITED";
     }
 
 

@@ -16,6 +16,6 @@ public interface CountryService {
     public GetCountryDto findCountryByIdService(Integer countryId);
     public List<GetCountryDto> findCountryListService();
 
-    public String createCountryService(CreateCountryDto countryDto);
-    public String editCountryService(EditCountryDto countryDto, Integer countryId);
+    public void createCountryService(CreateCountryDto countryDto);
+    public void editCountryService(EditCountryDto countryDto, Integer countryId);
 }

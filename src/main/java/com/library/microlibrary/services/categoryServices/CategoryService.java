@@ -14,6 +14,6 @@ public interface CategoryService {
     public GetCategoryNameDto findCategoryNameByIdService(Integer categoryId);
     public List<GetCategoryDto> findCategoryListService();
     public List<GetCategoryNameDto> findCategoryNameListService();
-    public String createCategoryService(CreateCategoryDto categoryDto);
-    public String editCategoryService(EditCategoryDto categoryDto, Integer categoryId);
+    public void createCategoryService(CreateCategoryDto categoryDto);
+    public void editCategoryService(EditCategoryDto categoryDto, Integer categoryId);
 }

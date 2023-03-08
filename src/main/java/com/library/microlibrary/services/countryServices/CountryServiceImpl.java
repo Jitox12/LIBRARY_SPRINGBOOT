@@ -1,20 +1,16 @@
 package com.library.microlibrary.services.countryServices;
 
 import com.library.microlibrary.dao.cityDao.CityDao;
-import com.library.microlibrary.dao.cityDao.CityDaoImpl;
 import com.library.microlibrary.dao.countryDao.CountryDao;
-import com.library.microlibrary.dto.cityDto.GetCityDto;
 import com.library.microlibrary.dto.countryDto.CreateCountryDto;
 import com.library.microlibrary.dto.countryDto.EditCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryNameDto;
-import com.library.microlibrary.entities.CityEntity;
 import com.library.microlibrary.entities.CountryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryDtoMapper;
 import com.library.microlibrary.mappers.countryMappers.CountryEntityToGetCountryNameDtoMapper;
-import com.library.microlibrary.utils.returnTextUtils.countryReturnTextUtils.CountryReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -82,41 +78,20 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public String createCountryService(CreateCountryDto countryDto) {
-        CountryEntity country = null;
-        GetCountryDto savedCountryDto = null;
-        String returnText = null;
-
+    public void createCountryService(CreateCountryDto countryDto) {
         try {
-            country = countryDao.createCountryDao(countryDto);
-            savedCountryDto = getCountryMapper.countryEntityToGetCountryDto(country);
-
-            returnText = CountryReturnTextUtil.createCountryText(savedCountryDto);
-
-            return returnText;
+            countryDao.createCountryDao(countryDto);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String editCountryService(EditCountryDto countryDto, Integer countryId) {
-        //New Country
-        GetCountryDto editedCountryDto = null;
-        CountryEntity editedCountry = null;
-
-        //Return Controller Format
-        String returnText = null;
-
-        //Set param's
+    public void editCountryService(EditCountryDto countryDto, Integer countryId) {
         countryDto.setCountryIdDto(countryId);
 
         try {
-            editedCountry = countryDao.editCountryDao(countryDto);
-            editedCountryDto = getCountryMapper.countryEntityToGetCountryDto(editedCountry);
-
-            returnText = CountryReturnTextUtil.editCountryText(editedCountryDto);
-            return returnText;
+            countryDao.editCountryDao(countryDto);
         }catch (IOException e){
             throw new RuntimeException(e);
         }

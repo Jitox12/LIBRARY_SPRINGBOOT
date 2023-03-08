@@ -16,6 +16,6 @@ public interface LibraryDao {
 
     public LibraryEntity findLibraryByIdDao(Integer libraryId) throws IOException;
     public List<LibraryEntity> findLibraryListDao() throws IOException;
-    public LibraryEntity createLibraryDao(CreateLibraryDto libraryDto, GetCityCountryDto cityDto) throws IOException;
-    public LibraryEntity editLibraryDao(EditLibraryDto libraryDto, GetCityCountryDto cityDto) throws IOException;
+    public void createLibraryDao(CreateLibraryDto libraryDto, GetCityCountryDto cityDto) throws IOException;
+    public void editLibraryDao(EditLibraryDto libraryDto, GetCityCountryDto cityDto) throws IOException;
 }

@@ -11,7 +11,6 @@ import com.library.microlibrary.entities.LibraryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityCountryDtoMapper;
 import com.library.microlibrary.mappers.libraryMappers.LibraryEntityToGetLibraryDtoMapper;
-import com.library.microlibrary.utils.returnTextUtils.libraryTextUtils.LibraryReturnTextUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,45 +64,23 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public String createLibraryService(CreateLibraryDto libraryDto) {
-        LibraryEntity savedLibrary = null;
+    public void createLibraryService(CreateLibraryDto libraryDto) {
         CityEntity city = null;
-
-        GetLibraryDto savedLibraryDto = null;
         GetCityCountryDto cityCountryDto = null;
-
-
-        String returnText = null;
 
         try {
             city = cityDao.findCityByIdDao(libraryDto.getCityIdDto());
-            if (Objects.isNull(city)) {
-                throw new BadRequestException("City does not exist with id: ".concat(String.valueOf(libraryDto.getCityIdDto())));
-            }
             cityCountryDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
-
-            savedLibrary = libraryDao.createLibraryDao(libraryDto, cityCountryDto);
-            savedLibraryDto = libraryEntityToGetLibraryDtoMapper.libraryEntityToGetLibraryDto(savedLibrary);
-
-            returnText = LibraryReturnTextUtil.createLibraryText(savedLibraryDto);
-
-            return returnText;
+            libraryDao.createLibraryDao(libraryDto, cityCountryDto);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
-    public String editLibraryService(EditLibraryDto libraryDto, Integer libraryId) {
-        LibraryEntity editedLibrary = null;
+    public void editLibraryService(EditLibraryDto libraryDto, Integer libraryId) {
         CityEntity city = null;
-
-        GetLibraryDto editedLibraryDto = null;
         GetCityCountryDto cityCountryDto = null;
-
-
-        String returnText = null;
 
         try {
             libraryDto.setLibraryIdDto(libraryId);
@@ -114,12 +91,8 @@ public class LibraryServiceImpl implements LibraryService {
             }
             cityCountryDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
 
-            editedLibrary = libraryDao.editLibraryDao(libraryDto, cityCountryDto);
-            editedLibraryDto = libraryEntityToGetLibraryDtoMapper.libraryEntityToGetLibraryDto(editedLibrary);
+            libraryDao.editLibraryDao(libraryDto, cityCountryDto);
 
-            returnText = LibraryReturnTextUtil.editLibraryText(editedLibraryDto);
-
-            return returnText;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

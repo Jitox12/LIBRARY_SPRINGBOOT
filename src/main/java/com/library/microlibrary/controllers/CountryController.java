@@ -33,19 +33,14 @@ public class CountryController {
 
     @PostMapping(value = "/create")
     public String CreateCountry(@RequestBody CreateCountryDto countryDto) {
-        String savedCountryMessage = null;
-        savedCountryMessage = countryService.createCountryService(countryDto);
-
-        return savedCountryMessage;
+        countryService.createCountryService(countryDto);
+        return "COUNTRY CREATED";
     }
 
 
     @PutMapping(value = "/edit/{countryId}")
-    public String EditCountry(@RequestBody EditCountryDto countryDto, @PathVariable Integer countryId){
-        String editedCountryMessage = null;
-
-        editedCountryMessage = countryService.editCountryService(countryDto,countryId);
-
-        return editedCountryMessage;
+    public String EditCountry(@RequestBody EditCountryDto countryDto, @PathVariable Integer countryId) {
+        countryService.editCountryService(countryDto, countryId);
+        return "COUNTRY EDITED";
     }
 }

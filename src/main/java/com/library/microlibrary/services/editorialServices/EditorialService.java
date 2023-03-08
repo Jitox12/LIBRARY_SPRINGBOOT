@@ -13,6 +13,6 @@ public interface EditorialService {
 
     public GetEditorialDto findEditorialByIdService(Integer editorialId);
     public List<GetEditorialDto> findEditorialListService();
-    public String createEditorialService(CreateEditorialDto editorialDto);
-    public String editEditorialService(EditEditorialDto editorialDto, Integer editorialId);
+    public void createEditorialService(CreateEditorialDto editorialDto);
+    public void editEditorialService(EditEditorialDto editorialDto, Integer editorialId);
 }
