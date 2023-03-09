@@ -25,7 +25,7 @@ public class BookEntity implements Serializable {
     private String bookName;
 
     @Column(name = "book_description", nullable = false)
-    private byte[] bookDescription;
+    private String bookDescription;
 
     @Column(name = "book_isbn", nullable = false, length = 50)
     private String bookIsbn;
@@ -36,8 +36,15 @@ public class BookEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "book_author",
+            name = "book_library",
             joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "book_id")},
-            inverseJoinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "author_id")})
-    private List<AuthorEntity> authors;
+            inverseJoinColumns = {@JoinColumn(name = "library_id", referencedColumnName = "library_id")})
+    private List<LibraryEntity> libraries;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_editorial",
+            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "editorial_id", referencedColumnName = "editorial_id")})
+    private List<EditorialEntity> editorials;
 }

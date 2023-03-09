@@ -11,8 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/library")
 public class LibraryController {
-
-
     private final LibraryService libraryService;
 
     public LibraryController(LibraryService libraryService) {

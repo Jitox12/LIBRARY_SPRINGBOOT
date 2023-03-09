@@ -15,6 +15,9 @@ import java.io.Serializable;
 public class BookAuthorEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
 
+    @Id
+    private Integer id;
+
     @EmbeddedId
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id", nullable = false)

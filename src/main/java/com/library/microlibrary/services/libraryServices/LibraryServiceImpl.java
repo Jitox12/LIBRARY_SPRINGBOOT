@@ -11,7 +11,6 @@ import com.library.microlibrary.entities.LibraryEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityCountryDtoMapper;
 import com.library.microlibrary.mappers.libraryMappers.LibraryEntityToGetLibraryDtoMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class LibraryServiceImpl implements LibraryService {
 
@@ -30,6 +28,13 @@ public class LibraryServiceImpl implements LibraryService {
     //MAPPERS
     private final LibraryEntityToGetLibraryDtoMapper libraryEntityToGetLibraryDtoMapper;
     private final CityEntityToGetCityCountryDtoMapper cityEntityToGetCityCountryDtoMapper;
+
+    public LibraryServiceImpl(LibraryDao libraryDao, CityDao cityDao, LibraryEntityToGetLibraryDtoMapper libraryEntityToGetLibraryDtoMapper,CityEntityToGetCityCountryDtoMapper cityEntityToGetCityCountryDtoMapper ){
+        this.libraryDao = libraryDao;
+        this.cityDao = cityDao;
+        this.libraryEntityToGetLibraryDtoMapper = libraryEntityToGetLibraryDtoMapper;
+        this.cityEntityToGetCityCountryDtoMapper = cityEntityToGetCityCountryDtoMapper;
+    }
 
     @Override
     public GetLibraryDto findLibraryByIdService(Integer libraryId) {
@@ -70,6 +75,9 @@ public class LibraryServiceImpl implements LibraryService {
 
         try {
             city = cityDao.findCityByIdDao(libraryDto.getCityIdDto());
+            if(Objects.isNull(city)){
+                throw new BadRequestException("City does not exist with Id: ".concat(String.valueOf(libraryDto.getCityIdDto())));
+            }
             cityCountryDto = cityEntityToGetCityCountryDtoMapper.cityEntityToGetCityDto(city);
             libraryDao.createLibraryDao(libraryDto, cityCountryDto);
         } catch (IOException e) {
@@ -96,6 +104,5 @@ public class LibraryServiceImpl implements LibraryService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

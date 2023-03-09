@@ -42,12 +42,10 @@ public class EditorialDaoImpl implements EditorialDao {
     }
 
     @Override
-    public EditorialEntity createEditorialDao(CreateEditorialDto editorialDto,
+    public void createEditorialDao(CreateEditorialDto editorialDto,
                                               GetCityCountryDto cityDto) throws IOException{
         EditorialEntity editorial = null;
         CityEntity city = null;
-
-        EditorialEntity savedEditorial = null;
 
         city = CityEntity.builder()
                 .cityName(cityDto.getCityNameDto())
@@ -60,19 +58,15 @@ public class EditorialDaoImpl implements EditorialDao {
                 .city(city)
                 .build();
 
-        savedEditorial = editorialRepository.save(editorial);
+         editorialRepository.save(editorial);
 
-        return savedEditorial;
     }
 
     @Override
-    public EditorialEntity editEditorialDao(EditEditorialDto editorialDto,
+    public void editEditorialDao(EditEditorialDto editorialDto,
                                             GetCityCountryDto cityDto) throws IOException{
         EditorialEntity editorial = null;
         CityEntity city = null;
-
-        EditorialEntity editedEditorial = null;
-
 
         city = CityEntity.builder()
                 .cityName(cityDto.getCityNameDto())
@@ -86,8 +80,6 @@ public class EditorialDaoImpl implements EditorialDao {
                 .city(city)
                 .build();
 
-        editedEditorial = editorialRepository.save(editorial);
-
-        return editedEditorial;
+        editorialRepository.save(editorial);
     }
 }

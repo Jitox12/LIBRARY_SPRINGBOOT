@@ -23,7 +23,7 @@ public class CityEntity implements Serializable {
     @Column(name = "city_name", nullable = false, length = 100)
     private String cityName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
 

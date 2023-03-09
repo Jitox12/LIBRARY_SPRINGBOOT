@@ -38,21 +38,24 @@ public class LibraryDaoImpl implements LibraryDao{
 
     @Override
     public void createLibraryDao(CreateLibraryDto libraryDto, GetCityCountryDto cityDto) throws IOException{
-        LibraryEntity library = null;
-        CityEntity city = null;
+        LibraryEntity library ;
+        CityEntity city ;
 
         city = CityEntity.builder()
                 .cityName(cityDto.getCityNameDto())
                 .cityId(cityDto.getCityIdDto())
                 .country(cityDto.getCountryDto())
                 .build();
-
+        System.out.println(cityDto.getCountryDto().getCountryName());
         library = LibraryEntity.builder()
                 .libraryName(libraryDto.getLibraryNameDto())
                 .city(city)
                 .build();
-
-        libraryRepository.save(library);
+        try{
+            libraryRepository.save(library);
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override

@@ -15,6 +15,6 @@ public interface EditorialDao {
     public EditorialEntity findEditorialNameByIdDao(Integer editorialId) throws IOException;
     EditorialEntity findEditorialByIdDao(Integer editorialId) throws IOException;
     public List<EditorialEntity> findEditorialListDao() throws IOException;
-    public EditorialEntity createEditorialDao(CreateEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
-    public EditorialEntity editEditorialDao(EditEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
+    public void createEditorialDao(CreateEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
+    public void editEditorialDao(EditEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
 }

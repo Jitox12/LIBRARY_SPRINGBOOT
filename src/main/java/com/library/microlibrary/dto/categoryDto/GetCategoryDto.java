@@ -9,5 +9,5 @@ import lombok.*;
 @Setter
 public class GetCategoryDto {
     private Integer categoryIdDto;
-    private String categoryDto;
+    private String categoryNameDto;
 }

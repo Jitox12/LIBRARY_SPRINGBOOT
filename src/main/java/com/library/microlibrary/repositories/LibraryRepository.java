@@ -11,5 +11,5 @@ public interface LibraryRepository extends JpaRepository<LibraryEntity, Integer>
 
     List<LibraryEntity> findAll();
     LibraryEntity findByLibraryId(Integer libraryId);
-    LibraryEntity save(LibraryEntity library);
+
 }

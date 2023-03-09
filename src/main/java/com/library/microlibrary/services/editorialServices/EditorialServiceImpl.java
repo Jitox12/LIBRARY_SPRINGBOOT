@@ -1,7 +1,6 @@
 package com.library.microlibrary.services.editorialServices;
 
 import com.library.microlibrary.dao.cityDao.CityDao;
-import com.library.microlibrary.dao.countryDao.CountryDao;
 import com.library.microlibrary.dao.editorialDao.EditorialDao;
 import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
@@ -12,7 +11,6 @@ import com.library.microlibrary.entities.EditorialEntity;
 import com.library.microlibrary.exceptionsConfig.exceptions.BadRequestException;
 import com.library.microlibrary.mappers.cityMappers.CityEntityToGetCityCountryDtoMapper;
 import com.library.microlibrary.mappers.editorialMappers.EditorialEntityToGetEditorialDtoMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,18 +18,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
 public class EditorialServiceImpl implements EditorialService{
 
     //DAO
     private final EditorialDao editorialDao;
     private final CityDao cityDao;
-    private final CountryDao countryDao;
 
     //MAPPERS
     private final EditorialEntityToGetEditorialDtoMapper editorialEntityToGetEditorialDtoMapper;
     private final CityEntityToGetCityCountryDtoMapper cityEntityToGetCityCountryDtoMapper;
+
+    public EditorialServiceImpl(EditorialDao editorialDao, CityDao cityDao, EditorialEntityToGetEditorialDtoMapper editorialEntityToGetEditorialDtoMapper, CityEntityToGetCityCountryDtoMapper cityEntityToGetCityCountryDtoMapper) {
+        this.editorialDao = editorialDao;
+        this.cityDao = cityDao;
+        this.editorialEntityToGetEditorialDtoMapper = editorialEntityToGetEditorialDtoMapper;
+        this.cityEntityToGetCityCountryDtoMapper = cityEntityToGetCityCountryDtoMapper;
+    }
 
     @Override
     public GetEditorialDto findEditorialByIdService(Integer editorialId) {
@@ -69,13 +72,9 @@ public class EditorialServiceImpl implements EditorialService{
 
     @Override
     public void createEditorialService(CreateEditorialDto editorialDto) {
-        EditorialEntity savedEditorial = null;
         CityEntity city = null;
-
         GetCityCountryDto cityDto = null;
-        GetEditorialDto savedEditorialDto = null;
 
-        String returnText = null;
         try {
             city = cityDao.findCityByIdDao(editorialDto.getCityIdDto());
             if(Objects.isNull(city)){

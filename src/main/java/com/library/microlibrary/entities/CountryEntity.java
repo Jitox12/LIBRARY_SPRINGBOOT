@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,5 +23,8 @@ public class CountryEntity implements Serializable {
 
     @Column(name = "country_name", nullable = false, length = 100)
     private String countryName;
+
+    @OneToMany(mappedBy ="country")
+    private List<CityEntity> cities;
 
 }
