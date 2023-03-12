@@ -15,14 +15,11 @@ import java.io.Serializable;
 public class BookEditorialEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
 
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "book_id", nullable = false)
-    private BookEntity book;
+    @Id
+    @Column(name = "book_id")
+    private Integer bookId;
 
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "editorial_id", nullable = false)
-    private EditorialEntity editorial;
+    @Column(name = "editorial_id")
+    private Integer editorialId;
 
 }

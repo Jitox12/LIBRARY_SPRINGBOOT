@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "editorial")
-@Embeddable
 public class EditorialEntity implements Serializable {
     private static final long serialVersionUID = 1645180097063090517L;
     @Id
@@ -24,7 +23,7 @@ public class EditorialEntity implements Serializable {
     @Column(name = "editorial_name", nullable = false, length = 100)
     private String editorialName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 

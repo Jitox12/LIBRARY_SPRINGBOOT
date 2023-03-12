@@ -8,23 +8,16 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "book_author")
 public class BookAuthorEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
 
+    @Column(name = "book_id")
+    private Integer bookId;
     @Id
-    private Integer id;
-
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "book_id", nullable = false)
-    private BookEntity book;
-
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id", nullable = false)
-    private AuthorEntity author;
+    @Column(name="author_id")
+    private Integer authorId;
 }

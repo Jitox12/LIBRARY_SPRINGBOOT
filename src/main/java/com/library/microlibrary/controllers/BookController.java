@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/book")
 public class BookController {
-
     private final BookService bookService;
 
     public BookController(BookService bookService) {
@@ -33,12 +32,15 @@ public class BookController {
     }
 
     @PostMapping(value ="/create")
-    public void createBook(@RequestBody CreateBookDto bookDto){
+    public String createBook(@RequestBody CreateBookDto bookDto){
         bookService.createBookService(bookDto);
+
+        return "BOOK CREATED";
     }
 
     @PutMapping(value = "/edit/{bookId}")
-    public void editBook(@PathVariable Integer bookId, @RequestBody EditBookDto bookDto){
+    public String editBook(@PathVariable Integer bookId, @RequestBody EditBookDto bookDto){
 
+        return "BOOK EDITED";
     }
 }

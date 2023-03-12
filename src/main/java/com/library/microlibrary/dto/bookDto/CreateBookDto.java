@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateBookDto {
+    private Integer bookIdDto;
     private String bookNameDto;
     private String bookDescriptionDto;
     private String bookIsbnDto;

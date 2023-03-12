@@ -7,10 +7,12 @@ import com.library.microlibrary.dto.categoryDto.GetCategoryDto;
 import com.library.microlibrary.entities.AuthorEntity;
 import com.library.microlibrary.entities.BookEntity;
 import com.library.microlibrary.entities.CategoryEntity;
+import com.library.microlibrary.repositories.BookAuthorRepository;
 import com.library.microlibrary.repositories.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ import java.util.List;
 public class BookDaoImpl implements BookDao {
 
     private final BookRepository bookRepository;
+    private final BookAuthorRepository bookAuthorRepository;
+
 
 
     @Override
@@ -37,10 +41,13 @@ public class BookDaoImpl implements BookDao {
         return bookList;
     }
 
+    @Transactional
     @Override
-    public void createBookDao(CreateBookDto bookDto, GetCategoryDto categoryDto) {
+    public BookEntity createBookDao(CreateBookDto bookDto, GetCategoryDto categoryDto) {
         BookEntity book = null;
         CategoryEntity category = null;
+
+        BookEntity bookSaved = null;
 
         category = CategoryEntity.builder()
                 .categoryId(categoryDto.getCategoryIdDto())
@@ -55,7 +62,9 @@ public class BookDaoImpl implements BookDao {
                 .category(category)
                 .build();
 
-        bookRepository.save(book);
+        bookSaved = bookRepository.save(book);
+
+        return bookSaved;
     }
 
     @Override

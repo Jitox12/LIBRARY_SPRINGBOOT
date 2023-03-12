@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetAuthorCityDto {
-
+    private Integer authorIdDto;
     private String authorNameDto;
     private CityEntity cityDto;
 }

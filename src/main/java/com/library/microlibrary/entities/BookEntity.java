@@ -6,14 +6,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "book")
-@Embeddable
 public class BookEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
     @Id
@@ -33,6 +29,13 @@ public class BookEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_author",
+            joinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "author_id")})
+    private List<AuthorEntity> authors;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

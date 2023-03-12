@@ -1,9 +1,11 @@
 package com.library.microlibrary.entities;
 
 import lombok.*;
+import org.apache.tomcat.jni.Library;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,8 +25,15 @@ public class CityEntity implements Serializable {
     @Column(name = "city_name", nullable = false, length = 100)
     private String cityName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
+    @OneToMany(mappedBy ="city")
+    private List<AuthorEntity> authors;
+    @OneToMany(mappedBy ="city")
+    private List<LibraryEntity> libraries;
+    @OneToMany(mappedBy ="city")
+    private List<EditorialEntity> editorials;
+
 
 }

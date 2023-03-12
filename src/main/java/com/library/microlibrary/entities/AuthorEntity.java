@@ -6,11 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "author")
 public class AuthorEntity implements Serializable {
@@ -23,7 +20,7 @@ public class AuthorEntity implements Serializable {
     @Column(name = "author_name", nullable = false, length = 50)
     private String authorName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 

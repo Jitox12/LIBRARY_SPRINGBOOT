@@ -14,6 +14,6 @@ public interface CategoryEntityToGetCategoryDtoMapper {
     CategoryEntityToGetCategoryDtoMapper INSTANCE = Mappers.getMapper(CategoryEntityToGetCategoryDtoMapper.class);
 
     @Mapping(source = "categoryId", target = "categoryIdDto")
-    @Mapping(source = "categoryName", target = "categoryDto")
+    @Mapping(source = "categoryName", target = "categoryNameDto")
     GetCategoryDto categoryEntityToGetCategoryDto(CategoryEntity category);
 }

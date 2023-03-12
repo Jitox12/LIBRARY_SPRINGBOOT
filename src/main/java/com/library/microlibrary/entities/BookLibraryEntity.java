@@ -14,16 +14,9 @@ import java.io.Serializable;
 @Table(name = "book_library")
 public class BookLibraryEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
-
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "book_id", nullable = false)
-    private BookEntity book;
-
-    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "library_id", nullable = false)
-    private LibraryEntity library;
-
-
+    @Id
+    @Column(name = "book_id")
+    private Integer bookId;
+    @Column(name = "library_id")
+    private Integer libraryId;
 }

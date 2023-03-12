@@ -17,6 +17,7 @@ public interface AuthorEntityToGetFullAuthorDtoMapper {
         return city.getCityName();
     }
 
+    @Mapping(source = "authorId", target = "authorIdDto")
     @Mapping(source = "authorName", target = "authorNameDto")
     @Mapping(source = "city", target = "cityDto")
     GetAuthorCityDto authorEntityToGetFullAuthorDto(AuthorEntity author);
