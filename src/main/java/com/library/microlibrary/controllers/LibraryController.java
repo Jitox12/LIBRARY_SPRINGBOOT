@@ -38,7 +38,7 @@ public class LibraryController {
         return "LIBRARY CREATED";
     }
 
-    @PostMapping(value="/create/libraryBook/{libraryId}")
+    @PostMapping(value="/create/librarybook/{libraryId}")
     public String createBookToLibrary(@PathVariable Integer libraryId, @RequestBody List<GABookDto> bookList){
         libraryService.createBookToLibraryService(libraryId,bookList);
         return "LIBRARY & BOOK RELATED";

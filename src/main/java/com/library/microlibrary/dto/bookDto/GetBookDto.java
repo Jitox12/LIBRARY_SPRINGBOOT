@@ -1,10 +1,11 @@
 package com.library.microlibrary.dto.bookDto;
 
-import com.library.microlibrary.entities.CategoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +16,8 @@ public class GetBookDto {
     private String bookNameDto;
     private String bookDescriptionDto;
     private String bookIsbnDto;
-    private CategoryEntity categoryDto;
+    private String categoryNameDto;
+    private Integer categoryIdDto;
+    private List<String> authorNameDto;
+    private List<Integer> authorIdDto;
 }

@@ -1,5 +1,6 @@
 package com.library.microlibrary.controllers;
 
+import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
 import com.library.microlibrary.dto.editorialDto.GetEditorialDto;
@@ -36,6 +37,12 @@ public class EditorialController {
         editorialService.createEditorialService(editorialDto);
         return "EDITORIAL CREATED";
     }
+    @PostMapping(value="/create/editorialbook/{editorialId}")
+    public String createBookToLibrary(@PathVariable Integer editorialId, @RequestBody List<GABookDto> bookList){
+        editorialService.createBookToEditorialService(editorialId,bookList);
+        return "EDITORIAL & BOOK RELATED";
+    }
+
     @PutMapping(value = "/edit/{editorialId}")
     public String editEditorial(@RequestBody EditEditorialDto editorialDto, @PathVariable Integer editorialId){
        editorialService.editEditorialService(editorialDto, editorialId);

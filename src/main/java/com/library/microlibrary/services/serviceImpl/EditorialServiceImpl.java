@@ -2,6 +2,7 @@ package com.library.microlibrary.services.serviceImpl;
 
 import com.library.microlibrary.dao.CityDao;
 import com.library.microlibrary.dao.EditorialDao;
+import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
@@ -107,6 +108,20 @@ public class EditorialServiceImpl implements EditorialService {
 
             editorialDao.editEditorialDao(editorialDto, cityDto);
 
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void createBookToEditorialService(Integer editorialId, List<GABookDto> bookList) {
+        EditorialEntity editorial = null;
+        try{
+            editorial = editorialDao.findEditorialByIdDao(editorialId);
+            if(Objects.isNull(editorial)){
+                throw new BadRequestException("Editorial does not exist with id: ".concat(String.valueOf(editorialId)));
+            }
+            editorialDao.createBookToEditorialDao(editorialId,bookList);
         }catch (IOException e){
             throw new RuntimeException(e);
         }

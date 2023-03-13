@@ -1,8 +1,7 @@
 package com.library.microlibrary.dao;
 
+import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
-import com.library.microlibrary.dto.cityDto.GetCityDto;
-import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
 import com.library.microlibrary.entities.EditorialEntity;
@@ -17,4 +16,7 @@ public interface EditorialDao {
     public List<EditorialEntity> findEditorialListDao() throws IOException;
     public void createEditorialDao(CreateEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
     public void editEditorialDao(EditEditorialDto editorialDto, GetCityCountryDto cityDto) throws IOException;
+
+    public void createBookToEditorialDao(Integer editorialId , List<GABookDto> bookList) throws IOException;
+
 }

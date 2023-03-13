@@ -4,7 +4,6 @@ import com.library.microlibrary.dao.CityDao;
 import com.library.microlibrary.dao.LibraryDao;
 import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.cityDto.GetCityCountryDto;
-import com.library.microlibrary.dto.libraryBookDto.CLibraryBookDto;
 import com.library.microlibrary.dto.libraryDto.CreateLibraryDto;
 import com.library.microlibrary.dto.libraryDto.EditLibraryDto;
 import com.library.microlibrary.dto.libraryDto.GetLibraryDto;
@@ -113,7 +112,6 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void createBookToLibraryService(Integer libraryId , List<GABookDto> bookList) {
         LibraryEntity library = null;
-        CLibraryBookDto libraryBookDto = null;
         try{
             library = libraryDao.findLibraryByIdDao(libraryId);
             if(Objects.isNull(library)){
