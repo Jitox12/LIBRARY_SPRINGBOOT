@@ -10,16 +10,17 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(BookEditorialEntity.class)
 @Entity
 @Table(name = "book_editorial")
 public class BookEditorialEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
 
     @Id
-    @Column(name = "book_id")
+    @Column(name = "book_id",unique = false)
     private Integer bookId;
-
-    @Column(name = "editorial_id")
+    @Id
+    @Column(name = "editorial_id", unique = false)
     private Integer editorialId;
 
 }

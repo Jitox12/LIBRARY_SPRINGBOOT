@@ -3,9 +3,8 @@ package com.library.microlibrary.controllers;
 import com.library.microlibrary.dto.editorialDto.CreateEditorialDto;
 import com.library.microlibrary.dto.editorialDto.EditEditorialDto;
 import com.library.microlibrary.dto.editorialDto.GetEditorialDto;
-import com.library.microlibrary.services.editorialServices.EditorialService;
+import com.library.microlibrary.services.EditorialService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

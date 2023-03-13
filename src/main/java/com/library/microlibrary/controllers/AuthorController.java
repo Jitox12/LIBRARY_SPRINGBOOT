@@ -3,7 +3,7 @@ package com.library.microlibrary.controllers;
 import com.library.microlibrary.dto.authorDto.CreateAuthorDto;
 import com.library.microlibrary.dto.authorDto.EditAuthorDto;
 import com.library.microlibrary.dto.authorDto.GetAuthorDto;
-import com.library.microlibrary.services.authorServices.AuthorService;
+import com.library.microlibrary.services.AuthorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

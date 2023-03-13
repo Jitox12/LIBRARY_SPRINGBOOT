@@ -28,7 +28,7 @@ public class LibraryEntity implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_library",
             joinColumns = {@JoinColumn(name = "library_id", referencedColumnName = "library_id")},

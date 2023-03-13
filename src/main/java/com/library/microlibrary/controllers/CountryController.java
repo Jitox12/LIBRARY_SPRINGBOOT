@@ -2,9 +2,8 @@ package com.library.microlibrary.controllers;
 
 import com.library.microlibrary.dto.countryDto.CreateCountryDto;
 import com.library.microlibrary.dto.countryDto.EditCountryDto;
-import com.library.microlibrary.dto.countryDto.GetCountryDto;
 import com.library.microlibrary.dto.countryDto.GetCountryNameDto;
-import com.library.microlibrary.services.countryServices.CountryService;
+import com.library.microlibrary.services.CountryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

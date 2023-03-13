@@ -6,9 +6,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "book")
 public class BookEntity implements Serializable {
     private static final long serialVersionUID = -6961761447662376254L;
@@ -26,7 +29,7 @@ public class BookEntity implements Serializable {
     @Column(name = "book_isbn", nullable = false, length = 50)
     private String bookIsbn;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private CategoryEntity category;
 

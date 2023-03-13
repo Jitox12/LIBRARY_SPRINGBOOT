@@ -1,9 +1,10 @@
 package com.library.microlibrary.controllers;
 
+import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.libraryDto.CreateLibraryDto;
 import com.library.microlibrary.dto.libraryDto.EditLibraryDto;
 import com.library.microlibrary.dto.libraryDto.GetLibraryDto;
-import com.library.microlibrary.services.libraryServices.LibraryService;
+import com.library.microlibrary.services.LibraryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,12 @@ public class LibraryController {
     public String createLibrary(@RequestBody CreateLibraryDto libraryDto){
         libraryService.createLibraryService(libraryDto);
         return "LIBRARY CREATED";
+    }
+
+    @PostMapping(value="/create/libraryBook/{libraryId}")
+    public String createBookToLibrary(@PathVariable Integer libraryId, @RequestBody List<GABookDto> bookList){
+        libraryService.createBookToLibraryService(libraryId,bookList);
+        return "LIBRARY & BOOK RELATED";
     }
 
     @PutMapping(value = "/edit/{libraryId}")

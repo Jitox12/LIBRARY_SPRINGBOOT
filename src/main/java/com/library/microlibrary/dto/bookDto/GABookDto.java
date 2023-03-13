@@ -1,19 +1,19 @@
 package com.library.microlibrary.dto.bookDto;
 
-import com.library.microlibrary.entities.CategoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetBookDto {
+public class GABookDto {
     private Integer bookIdDto;
     private String bookNameDto;
-    private String bookDescriptionDto;
-    private String bookIsbnDto;
-    private CategoryEntity categoryDto;
+    private String categoryNameDto;
+    private List<String> authorNameDto;
 }

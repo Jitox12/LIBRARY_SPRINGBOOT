@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class EditCityDto {
-
     private Integer cityIdDto;
     private String cityNameDto;
     private Integer countryIdDto;

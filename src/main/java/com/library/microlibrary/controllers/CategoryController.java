@@ -4,7 +4,7 @@ import com.library.microlibrary.dto.categoryDto.CreateCategoryDto;
 import com.library.microlibrary.dto.categoryDto.EditCategoryDto;
 import com.library.microlibrary.dto.categoryDto.GetCategoryDto;
 import com.library.microlibrary.dto.categoryDto.GetCategoryNameDto;
-import com.library.microlibrary.services.categoryServices.CategoryService;
+import com.library.microlibrary.services.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

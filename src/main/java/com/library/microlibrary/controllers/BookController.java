@@ -2,8 +2,9 @@ package com.library.microlibrary.controllers;
 
 import com.library.microlibrary.dto.bookDto.CreateBookDto;
 import com.library.microlibrary.dto.bookDto.EditBookDto;
+import com.library.microlibrary.dto.bookDto.GABookDto;
 import com.library.microlibrary.dto.bookDto.GetBookDto;
-import com.library.microlibrary.services.bookServices.BookService;
+import com.library.microlibrary.services.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public class BookController {
     @GetMapping(value = "/find/{bookId}")
     public GetBookDto findBookById(@PathVariable Integer bookId){
         GetBookDto bookDto = null;
-
+        bookDto = bookService.findBookByIdService(bookId);
         return bookDto;
     }
 
     @GetMapping(value="/find-all")
-    public List<GetBookDto> findBookList(){
-        List<GetBookDto> bookDtoList = null;
-
+    public List<GABookDto> findBookList(){
+        List<GABookDto> bookDtoList = null;
+        bookDtoList = bookService.findBookListService();
         return bookDtoList;
     }
 

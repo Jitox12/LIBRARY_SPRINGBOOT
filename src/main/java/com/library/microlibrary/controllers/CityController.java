@@ -3,7 +3,7 @@ package com.library.microlibrary.controllers;
 import com.library.microlibrary.dto.cityDto.CreateCityDto;
 import com.library.microlibrary.dto.cityDto.EditCityDto;
 import com.library.microlibrary.dto.cityDto.GetCityNameDto;
-import com.library.microlibrary.services.cityServices.CityService;
+import com.library.microlibrary.services.CityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
